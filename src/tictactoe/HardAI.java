@@ -13,6 +13,9 @@ class HardAI extends EasyAI {
     @Override
     int[] getMoveCoordinates(Match match) {
 
+        //A minimax algoritmus implementációjának forrása:
+        // https://github.com/CodingTrain/website/blob/main/CodingChallenges/CC_154_Tic_Tac_Toe_Minimax/P5/minimax.js
+
         int bestScore = -1000;
         int[] step = new int[2];
 
@@ -74,52 +77,5 @@ class HardAI extends EasyAI {
         }
 
         return bestScore;
-
-        /*if (isMaximizing) {
-            for (int i = 0; i < match.FIELD_HEIGHT; i++) {
-                for (int j = 0; j < match.FIELD_LENGTH; j++) {
-                    if (match.getField()[i][j] == Mark.EMPTY.getChar()) {
-                        move[0] = i;
-                        move[1] = j;
-
-                        match.getField()[i][j] = mark.getChar();
-
-                        score = minimax(match, depth + 1, false);
-
-                        match.getField()[i][j] = Mark.EMPTY.getChar();
-
-                        if (score > bestScore) {
-                            bestScore = score;
-                            bestMove[0] = i;
-                            bestMove[1] = j;
-
-                        }
-                    }
-                }
-            }
-            return bestScore;
-        } else {
-            for (int i = 0; i < match.FIELD_HEIGHT; i++) {
-                for (int j = 0; j < match.FIELD_LENGTH; j++) {
-                    if (match.field[i][j] == Mark.EMPTY.getChar()) {
-                        move[0] = i;
-                        move[1] = j;
-
-                        match.field[i][j] = this.mark.getOtherMark();
-
-                        score = minimax(match, depth + 1, true);
-
-                        match.field[i][j] = Mark.EMPTY.getChar();
-
-                        if (score < bestScore) {
-                            bestScore = score;
-                            bestMove[0] = i;
-                            bestMove[1] = j;
-                        }
-                    }
-                }
-            }
-            return bestScore;*/
-
     }
 }

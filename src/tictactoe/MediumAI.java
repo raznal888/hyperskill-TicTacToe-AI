@@ -15,6 +15,11 @@ class MediumAI extends EasyAI {
     }
 
     private int[] checkForMove(Match match) {
+
+        //A közepes nehézségi fokozat esetén a gép ellenőrzi, hogy saját maga vagy az ellenfél egy lépésre van-e
+        //a győzelemtől. Ha igen, akkor úgy lép, hogy győzzön vagy megakadályozza az ellenfél győzelmét.
+        //Más esetben véletlenszerűen lépked.
+
         if (match.getTurnCounter() >= 3) {
             int[][] moves = new int[2][2];
             moves[0] = canWinInOneMove(match, match.getPlayerMoves()[match.getCurrentPlayer().mark.ordinal()]);
@@ -38,6 +43,8 @@ class MediumAI extends EasyAI {
         for (int i = 0; i < match.FIELD_HEIGHT; i++) {
             for (int j = 0; j < match.FIELD_LENGTH; j++) {
 
+                //Sorok ellenőrzése
+
                 if (currentMove == match.getField()[move[0]][i] && i != move[1]) {
                     coordinates[0] = move[0];
                     coordinates[1] = (2 - move[1]) + (2 - i) - 1;
@@ -46,6 +53,8 @@ class MediumAI extends EasyAI {
                         return coordinates;
                     }
                 }
+
+                //Oszlopok ellenőrzése
 
                 if (currentMove == match.getField()[i][move[1]] && i != move[0]) {
                     coordinates[0] = (2 - move[0]) + (2 - i) - 1;
@@ -58,6 +67,8 @@ class MediumAI extends EasyAI {
 
                 if (i != move[0] && j != move[1] && currentMove == match.getField()[i][j]) {
 
+                    //Főátló ellenőrzése
+
                     if (move[0] == move[1] && i == j) {
                         coordinates[0] = (2 - move[0]) + (2 - i) - 1;
                         coordinates[1] = coordinates[0];
@@ -66,6 +77,8 @@ class MediumAI extends EasyAI {
                             return coordinates;
                         }
                     }
+
+                    //Mellékátló ellenőrzése
 
                     if (move[0] + move[1] == 2 && i + j == 2 && currentMove == match.getField()[i][j]) {
                         coordinates[0] = (2 - move[0]) + (2 - i) - 1;
